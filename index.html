@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processing...</title>
+</head>
+<body>
+    <p>If this page doesn't close automatically, please close it manually.</p>
+    <script>
+        // Get Zapier webhook URL from query string
+        const params = new URLSearchParams(window.location.search);
+        const zapierUrl = params.get("url");
+
+        if (zapierUrl) {
+            fetch(zapierUrl, { method: "POST" }) // Send request to Zapier
+                .then(() => setTimeout(() => window.close(), 2000)) // Close tab in 2 sec
+                .catch(() => setTimeout(() => window.close(), 2000));
+        } else {
+            document.body.innerHTML = "<p>Error: No URL provided.</p>";
+        }
+    </script>
+</body>
+</html>
